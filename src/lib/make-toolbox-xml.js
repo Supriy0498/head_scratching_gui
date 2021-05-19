@@ -677,7 +677,7 @@ const operators = function (isInitialSetup) {
                     <field name="NUM"/>
                 </shadow>
             </value>
-        </block>
+        </block> 
         <block type="operator_square">
             <value name="NUM">
                 <shadow type="math_number">
