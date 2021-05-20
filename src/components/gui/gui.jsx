@@ -24,6 +24,7 @@ import Watermark from '../../containers/watermark.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
+import Task8Modal from '../../containers/task8-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
@@ -113,6 +114,7 @@ const GUIComponent = props => {
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
         showComingSoon,
+        showTask8Modal,
         soundsTabVisible,
         stageSizeMode,
         targetIsStage,
@@ -160,6 +162,7 @@ const GUIComponent = props => {
                 dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
+                {showTask8Modal ? (<Task8Modal/>) : null}
                 {telemetryModalVisible ? (
                     <TelemetryModal
                         isRtl={isRtl}
@@ -418,6 +421,7 @@ GUIComponent.propTypes = {
     onToggleLoginOpen: PropTypes.func,
     renderLogin: PropTypes.func,
     showComingSoon: PropTypes.bool,
+    showTask8Modal: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
@@ -443,11 +447,12 @@ GUIComponent.defaultProps = {
     isShared: false,
     loading: false,
     showComingSoon: false,
+    showTask8Modal: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 
 const mapStateToProps = state => ({
-    // This is the button's mode, as opposed to the actual current state
+    // This is the button's modes, as opposed to the actual current state
     stageSizeMode: state.scratchGui.stageSize.stageSize
 });
 
