@@ -37,10 +37,4 @@ Task8Modal.propTypes = {
     onCancel: PropTypes.func.isRequired,
 };
 
-// const mapDispatchToProps = dispatch => {
-//     return{
-//     onCancel: () => dispatch(closeTask8Modal())
-//     };
-// };
-
 export default Task8Modal;

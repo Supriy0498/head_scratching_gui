@@ -52,14 +52,14 @@ class GUI extends React.Component {
 
     handleModalOpening(){
         this.props.onOpen()
-        this.modalTimer.timer = setTimeout(() => this.props.onClose(), 5000)
+        this.modalTimer.timer = setTimeout(() => this.props.onClose(), 10000)
     }
 
     componentDidMount () {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.props.onStorageInit(storage);
         this.props.onVmInit(this.props.vm);
-        this.modalTimer.timer = setTimeout(() => this.handleModalOpening(), 1000)
+        this.modalTimer.timer = setTimeout(() => this.handleModalOpening(), 30000)
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
