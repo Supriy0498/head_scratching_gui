@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 import VM from 'scratch-vm';
 import {injectIntl, intlShape} from 'react-intl';
+import { openTask8Modal,closeTask8Modal } from  '../reducers/task8-modal.js';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {
@@ -41,10 +42,24 @@ import GUIComponent from '../components/gui/gui.jsx';
 import {setIsScratchDesktop} from '../lib/isScratchDesktop.js';
 
 class GUI extends React.Component {
+
+    modalTimer = {timer:null};
+
+    constructor(props) {
+        super(props)
+        this.handleModalOpening = this.handleModalOpening.bind(this)
+    }
+
+    handleModalOpening(){
+        this.props.onOpen()
+        this.modalTimer.timer = setTimeout(() => this.props.onClose(), 5000)
+    }
+
     componentDidMount () {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.props.onStorageInit(storage);
         this.props.onVmInit(this.props.vm);
+        this.modalTimer.timer = setTimeout(() => this.handleModalOpening(), 1000)
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
@@ -55,6 +70,9 @@ class GUI extends React.Component {
             // At this time the project view in www doesn't need to know when a project is unloaded
             this.props.onProjectLoaded();
         }
+    }
+    componentWillUnmount() {
+        clearTimeout(this.modalTimer.timer);
     }
     render () {
         if (this.props.isError) {
@@ -143,7 +161,7 @@ const mapStateToProps = state => {
         isShowingProject: getIsShowingProject(loadingState),
         loadingStateVisible: state.scratchGui.modals.loadingProject,
         projectId: state.scratchGui.projectState.projectId,
-        showTask8Modal: state.scratchGui.modals.task8Modal,
+        showTask8Modal: state.scratchGui.task8Modal.open,
         soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
         targetIsStage: (
             state.scratchGui.targets.stage &&
@@ -162,7 +180,9 @@ const mapDispatchToProps = dispatch => ({
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
-    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal())
+    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal()),
+    onOpen: () => dispatch(openTask8Modal()),
+    onClose: () => dispatch(closeTask8Modal())
 });
 
 const ConnectedGUI = injectIntl(connect(

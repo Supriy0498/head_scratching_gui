@@ -21,6 +21,7 @@ import fontsLoadedReducer, {fontsLoadedInitialState} from './fonts-loaded';
 import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
 import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
+import task8ModalReducer, {task8ModalInitialState} from './task8-modal';
 import timeoutReducer, {timeoutInitialState} from './timeout';
 import toolboxReducer, {toolboxInitialState} from './toolbox';
 import vmReducer, {vmInitialState} from './vm';
@@ -55,6 +56,7 @@ const guiInitialState = {
     fontsLoaded: fontsLoadedInitialState,
     restoreDeletion: restoreDeletionInitialState,
     targets: targetsInitialState,
+    task8Modal:task8ModalInitialState,
     timeout: timeoutInitialState,
     toolbox: toolboxInitialState,
     vm: vmInitialState,
@@ -154,6 +156,7 @@ const guiReducer = combineReducers({
     fontsLoaded: fontsLoadedReducer,
     restoreDeletion: restoreDeletionReducer,
     targets: targetReducer,
+    task8Modal:task8ModalReducer,
     timeout: timeoutReducer,
     toolbox: toolboxReducer,
     vm: vmReducer,

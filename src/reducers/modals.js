@@ -11,7 +11,6 @@ const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
 const MODAL_SOUND_RECORDER = 'soundRecorder';
 const MODAL_CONNECTION = 'connectionModal';
 const MODAL_TIPS_LIBRARY = 'tipsLibrary';
-const MODAL_TASK8 = 'task8Modal';
 
 const initialState = {
     [MODAL_BACKDROP_LIBRARY]: false,
@@ -23,8 +22,7 @@ const initialState = {
     [MODAL_SPRITE_LIBRARY]: false,
     [MODAL_SOUND_RECORDER]: false,
     [MODAL_CONNECTION]: false,
-    [MODAL_TIPS_LIBRARY]: false,
-    [MODAL_TASK8]: true
+    [MODAL_TIPS_LIBRARY]: false
 };
 
 const reducer = function (state, action) {
@@ -84,12 +82,6 @@ const openConnectionModal = function () {
 const openTipsLibrary = function () {
     return openModal(MODAL_TIPS_LIBRARY);
 };
-const openTask8Modal = function () {
-    return openModal(MODAL_TASK8);
-};
-const closeTask8Modal = function () {
-    return closeModal(MODAL_TASK8);
-};
 const closeBackdropLibrary = function () {
     return closeModal(MODAL_BACKDROP_LIBRARY);
 };
@@ -133,8 +125,6 @@ export {
     openTelemetryModal,
     openTipsLibrary,
     openConnectionModal,
-    openTask8Modal,
-    closeTask8Modal,
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeExtensionLibrary,
